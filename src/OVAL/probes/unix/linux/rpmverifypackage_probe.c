@@ -346,7 +346,7 @@ void *rpmverifypackage_probe_init(void)
 	}
 
 	g_rpm->rpm.rpmts = rpmtsCreate();
-    char dbpath[] = getenv("OSCAP_PROBE_RPM_DB_PATH");
+    const char* dbpath = getenv("OSCAP_PROBE_RPM_DB_PATH");
     if ((dbpath != NULL) && (strlen(dbpath) > 0)) {
         SET_RPM_DB_PATH(g_rpm->rpm.rpmts, dbpath);
     }
