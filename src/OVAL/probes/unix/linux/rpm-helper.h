@@ -86,8 +86,7 @@ int rpmErrorCb (rpmlogRec rec, rpmlogCallbackData data);
 #else
 #define DISABLE_PLUGINS(ts) rpmDefineMacro(NULL,"__plugindir \"\"", 0);
 #endif
-
-#define SET_RPM_DB_PATH(ts, dbpath) rpmPushMacro(NULL, "_dbpath", NULL, dbpath, 0);
+#define SET_RPM_DB_PATH(ts, dbpath) rpmDefineMacro(NULL, "_dbpath /var/lib/rpm-copy", 0);
 
 #ifndef HAVE_RPMVERIFYFILE
 int rpmVerifyFile(const rpmts ts, const rpmfi fi,
