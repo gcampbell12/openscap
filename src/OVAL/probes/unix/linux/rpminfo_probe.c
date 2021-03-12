@@ -51,6 +51,7 @@
 #endif
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <errno.h>
 #include <assert.h>
@@ -295,6 +296,10 @@ void *rpminfo_probe_init(void)
         }
 
 	g_rpm->rpmts = rpmtsCreate();
+    char dbpath = getenv("OSCAP_PROBE_RPM_DB_PATH");
+    if ((dbpath != NULL) && (strlen(dbpath) > 0)) {
+        SET_RPM_DB_PATH(g_rpm->rpmts, dbpath);
+    }
 	pthread_mutex_init (&(g_rpm->mutex), NULL);
 
 	return ((void *)g_rpm);

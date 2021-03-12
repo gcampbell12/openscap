@@ -34,6 +34,7 @@
 #endif
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <errno.h>
 #include <assert.h>
@@ -345,6 +346,10 @@ void *rpmverifypackage_probe_init(void)
 	}
 
 	g_rpm->rpm.rpmts = rpmtsCreate();
+    char dbpath = getenv("OSCAP_PROBE_RPM_DB_PATH");
+    if ((dbpath != NULL) && (strlen(dbpath) > 0)) {
+        SET_RPM_DB_PATH(g_rpm->rpm.rpmts, dbpath);
+    }
 
 	if (CHROOT_IS_SET()) {
 		CHROOT_LEAVE();
